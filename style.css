@@ -1,0 +1,9 @@
+h1, h2 {
+	font-family: Lato, serif;
+}
+
+body, #cesiumContainer {
+	margin: 0;
+	height: 100vh;
+	width: 100vw;
+}
