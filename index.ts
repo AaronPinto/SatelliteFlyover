@@ -495,6 +495,31 @@ const polys = {
 	]
 };
 
+// polys.features = polys.features.map(feature => {
+// 	feature.id = feature.properties.product_name;
+// 	return feature;
+// }).sort((a, b) => {
+// 	return a.properties.scene_start_time < b.properties.scene_start_time ? -1 : 1;
+// });
+
+// let polySatTimes = polys.features.map(feature => {
+// 	//Figure out which source its from, then parse and return the datetime and which satellite it is
+// 	switch (feature.properties.source) {
+// 		case "SkySat": {
+// 			let prodname = feature.properties.product_name.split("_");
+// 			let st = prodname[0].concat(prodname[1]);
+// 			let pattern = /(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})/;
+// 			let dt = Cesium.JulianDate.fromDate(new Date(st.replace(pattern, '$1-$2-$3T$4:$5:$6Z')));
+//
+// 			return [Cesium.JulianDate.toGregorianDate(dt), "SKYSAT-".concat(prodname[2].slice(-2).toUpperCase())];
+// 		}
+// 		case "Kompsat": {
+// 			//TODO Get sample data and figure out how to do this
+// 			break;
+// 		}
+// 	}
+// });
+
 viewer.dataSources.add(Cesium.GeoJsonDataSource.load(polys, {
 	stroke: Cesium.Color.HOTPINK,
 	fill: Cesium.Color.PINK,
@@ -504,19 +529,49 @@ const test = new Cesium.CzmlDataSource();
 //TODO tracking, add new satellite packet every 24 hours and then swap tracking to the satellite that will fly overhead a polygon 1 min beforehand
 //this lets you have useful non-random ID's so that you can track, because cesium is dumb af and doesn't let you track by name for some fucking reason
 
-console.log(czml);
+//Group packets by 24 period
+let temp = [], result = [];
+for (let i = 0; i < czml.length; i++) {
+	if (czml[i].id !== czml[1].id)
+		temp.push(czml[i]);
+	else {
+		result.push(temp);
+		temp = [];
+		temp.push(czml[i]);
+	}
+}
+result.push(temp);
 
-// viewer.dataSources.add(test.process());
-//
-// let prevDay = Cesium.JulianDate.toGregorianDate(viewer.clock.startTime);
-// viewer.clock.onTick.addEventListener(clock => {
-// 	let gregorianDate = Cesium.JulianDate.toGregorianDate(clock.currentTime);
-// 	if(prevDay.day != gregorianDate.day) {
-// 		console.log(prevDay.day + " " + gregorianDate.day);
-//
-// 		test.process();
-// 	}
-// 	prevDay.day = gregorianDate.day;
-// });
+//Add drop down menu that lets user track any satellite that is loaded
+let options = result[1].map(satellite => {
+	return satellite.label.text;
+}).sort();
 
-// viewer.trackedEntity = dataSource.entities.getById('Satellite/SKYSAT-1');
+let menu = document.createElement('select');
+menu.className = 'cesium-button';
+menu.onchange = () => {
+	let item = options[menu.selectedIndex];
+	viewer.trackedEntity = test.entities.getById('Satellite/' + item.textContent);
+};
+
+for (let i = 0; i < options.length; i++) {
+	let option = document.createElement('option');
+	option.textContent = options[i];
+	menu.appendChild(option);
+}
+
+let dayCount = 0;
+test.process(result.shift());//document packet
+test.process(result[dayCount++]);//1st satellites' packet
+
+viewer.dataSources.add(test);
+
+let prevDay = Cesium.JulianDate.toGregorianDate(viewer.clock.startTime);
+viewer.clock.onTick.addEventListener(clock => {
+	let gregorianDate = Cesium.JulianDate.toGregorianDate(clock.currentTime);
+	if (prevDay.day != gregorianDate.day) {
+		dayCount %= (result.length);//so that it can loop from the end time back to start
+		test.process(result[dayCount++]);
+	}
+	prevDay.day = gregorianDate.day;
+});

@@ -309,5 +309,5 @@ def create_czml(inputfile_path, outputfile_path=None, start_time=None, end_time=
 			doc.packets.append(sat_packet)
 
 	if not outputfile_path:
-		outputfile_path = "orbit.czml"
+		outputfile_path = "orbit.json"
 	doc.write(outputfile_path)
