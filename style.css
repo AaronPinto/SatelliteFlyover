@@ -8,16 +8,11 @@ body, #cesiumContainer {
 	width: 100vw;
 }
 
-.toolbar-left {
+.tracking-menu {
 	display: block;
 	position: absolute;
 	top: 5px;
 	left: 5px;
-}
-
-.cesium-button {
-	display: inline-block;
-	position: relative;
 	background: #303336;
 	border: 1px solid #444;
 	color: #edffff; /* For text buttons */
@@ -33,14 +28,14 @@ body, #cesiumContainer {
 	user-select: none;
 }
 
-.cesium-button:focus {
+.tracking-menu:focus {
 	color: #fff; /* For text buttons */
 	fill: #fff; /* For SVG buttons */
 	border-color: #ea4;
 	outline: none;
 }
 
-.cesium-button:hover {
+.tracking-menu:hover {
 	color: #fff; /* For text buttons */
 	fill: #fff; /* For SVG buttons */
 	background: #48b;
@@ -48,7 +43,7 @@ body, #cesiumContainer {
 	box-shadow: 0 0 8px #fff;
 }
 
-.cesium-button:active {
+.tracking-menu:active {
 	color: #000; /* For text buttons */
 	fill: #000; /* For SVG buttons */
 	background: #adf;

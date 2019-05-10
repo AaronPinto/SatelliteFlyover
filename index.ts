@@ -5,8 +5,18 @@ import czml from './orbit.json';
 declare var Cesium: any;
 
 const viewer = new Cesium.Viewer('cesiumContainer', {
-	shouldAnimate: true
+	shouldAnimate: true,
+	skyAtmosphere: false,
+	imageryProvider: new Cesium.UrlTemplateImageryProvider({
+		url: `https://api.mapbox.com/styles/v1/skywatch-team/cjsgety8v0s2m1fo49t27s093/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2t5d2F0Y2gtdGVhbSIsImEiOiJjajgzMGlyNmk1ZTBqMnducWFidjNqZjU4In0.6f5beyt2YsWJcAPfxRYuEw`
+	})
 });
+viewer.scene.fxaa = false;
+viewer.scene.backgroundColor = Cesium.Color.WHITE;
+viewer.scene.globe.baseColor = Cesium.Color.BLUE;
+viewer.scene.highDynamicRange = false;
+viewer.scene.fog.enabled = false;
+viewer.scene.globe.showGroundAtmosphere = false;
 
 const polys = {
 	"type": "FeatureCollection",
@@ -542,34 +552,37 @@ for (let i = 0; i < czml.length; i++) {
 }
 result.push(temp);
 
-//Add drop down menu that lets user track any satellite that is loaded
-let options = result[1].map(satellite => {
-	return satellite.label.text;
-}).sort();
-
-let menu = document.createElement('select');
-menu.className = 'cesium-button';
-menu.onchange = () => {
-	let item = options[menu.selectedIndex];
-	viewer.trackedEntity = test.entities.getById('Satellite/' + item.textContent);
-};
-
-for (let i = 0; i < options.length; i++) {
-	let option = document.createElement('option');
-	option.textContent = options[i];
-	menu.appendChild(option);
-}
-
 let dayCount = 0;
 test.process(result.shift());//document packet
 test.process(result[dayCount++]);//1st satellites' packet
 
 viewer.dataSources.add(test);
 
+//Add drop down menu that lets user track any satellite that is loaded
+let options = result[1].map(satellite => {
+	return satellite.label.text;
+}).sort();
+
+let menu = document.createElement('select');
+menu.className = 'tracking-menu';
+menu.onchange = () => {
+	let item = options[menu.selectedIndex];
+	viewer.trackedEntity = test.entities.getById('Satellite/' + item);
+	viewer.trackedEntity.viewFrom = new Cesium.Cartesian3(-100, 0, 100000);
+};
+for (let i = 0; i < options.length; i++) {
+	let option = document.createElement('option');
+	option.textContent = options[i];
+	menu.appendChild(option);
+}
+document.body.appendChild(menu);
+
 let prevDay = Cesium.JulianDate.toGregorianDate(viewer.clock.startTime);
 viewer.clock.onTick.addEventListener(clock => {
 	let gregorianDate = Cesium.JulianDate.toGregorianDate(clock.currentTime);
 	if (prevDay.day != gregorianDate.day) {
+		//FIX THIS BECAUSE IT BREAKS IF YOU CLICK ON THE TIMELINE
+		//relate the current day to the index number of the array
 		dayCount %= (result.length);//so that it can loop from the end time back to start
 		test.process(result[dayCount++]);
 	}
