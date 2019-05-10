@@ -1,8 +1,5 @@
-// Import stylesheets
-import './style.css';
-import czml from './orbit.json';
-
-declare var Cesium: any;
+import czml from "./orbit.json";
+import Cesium from './Cesium.js';
 
 const viewer = new Cesium.Viewer('cesiumContainer', {
 	shouldAnimate: true,
@@ -530,61 +527,62 @@ const polys = {
 // 	}
 // });
 
-viewer.dataSources.add(Cesium.GeoJsonDataSource.load(polys, {
-	stroke: Cesium.Color.HOTPINK,
-	fill: Cesium.Color.PINK,
-}));
+// viewer.dataSources.add(Cesium.GeoJsonDataSource.load(polys, {
+// 	stroke: Cesium.Color.HOTPINK,
+// 	fill: Cesium.Color.PINK,
+// }));
 
 const test = new Cesium.CzmlDataSource();
 //TODO tracking, add new satellite packet every 24 hours and then swap tracking to the satellite that will fly overhead a polygon 1 min beforehand
 //this lets you have useful non-random ID's so that you can track, because cesium is dumb af and doesn't let you track by name for some fucking reason
 
 //Group packets by 24 period
-let temp = [], result = [];
-for (let i = 0; i < czml.length; i++) {
-	if (czml[i].id !== czml[1].id)
-		temp.push(czml[i]);
-	else {
-		result.push(temp);
-		temp = [];
-		temp.push(czml[i]);
-	}
-}
-result.push(temp);
+// let temp = [], result = [];
+// for (let i = 0; i < czml.length; i++) {
+// 	if (czml[i].id !== czml[1].id)
+// 		temp.push(czml[i]);
+// 	else {
+// 		result.push(temp);
+// 		temp = [];
+// 		temp.push(czml[i]);
+// 	}
+// }
+// result.push(temp);
+//
+// let dayCount = 0;
+// test.process(result.shift());//document packet
+// test.process(result[dayCount++]);//1st satellites' packet
 
-let dayCount = 0;
-test.process(result.shift());//document packet
-test.process(result[dayCount++]);//1st satellites' packet
-
+test.load(czml);
 viewer.dataSources.add(test);
 
-//Add drop down menu that lets user track any satellite that is loaded
-let options = result[1].map(satellite => {
-	return satellite.label.text;
-}).sort();
-
-let menu = document.createElement('select');
-menu.className = 'tracking-menu';
-menu.onchange = () => {
-	let item = options[menu.selectedIndex];
-	viewer.trackedEntity = test.entities.getById('Satellite/' + item);
-	viewer.trackedEntity.viewFrom = new Cesium.Cartesian3(-100, 0, 100000);
-};
-for (let i = 0; i < options.length; i++) {
-	let option = document.createElement('option');
-	option.textContent = options[i];
-	menu.appendChild(option);
-}
-document.body.appendChild(menu);
-
-let prevDay = Cesium.JulianDate.toGregorianDate(viewer.clock.startTime);
-viewer.clock.onTick.addEventListener(clock => {
-	let gregorianDate = Cesium.JulianDate.toGregorianDate(clock.currentTime);
-	if (prevDay.day != gregorianDate.day) {
-		//FIX THIS BECAUSE IT BREAKS IF YOU CLICK ON THE TIMELINE
-		//relate the current day to the index number of the array
-		dayCount %= (result.length);//so that it can loop from the end time back to start
-		test.process(result[dayCount++]);
-	}
-	prevDay.day = gregorianDate.day;
-});
+// //Add drop down menu that lets user track any satellite that is loaded
+// let options = result[1].map(satellite => {
+// 	return satellite.label.text;
+// }).sort();
+//
+// let menu = document.createElement('select');
+// menu.className = 'tracking-menu';
+// menu.onchange = () => {
+// 	let item = options[menu.selectedIndex];
+// 	viewer.trackedEntity = test.entities.getById('Satellite/' + item);
+// 	viewer.trackedEntity.viewFrom = new Cesium.Cartesian3(-100, 0, 100000);
+// };
+// for (let i = 0; i < options.length; i++) {
+// 	let option = document.createElement('option');
+// 	option.textContent = options[i];
+// 	menu.appendChild(option);
+// }
+// document.body.appendChild(menu);
+//
+// let prevDay = Cesium.JulianDate.toGregorianDate(viewer.clock.startTime);
+// viewer.clock.onTick.addEventListener(clock => {
+// 	let gregorianDate = Cesium.JulianDate.toGregorianDate(clock.currentTime);
+// 	if (prevDay.day != gregorianDate.day) {
+// 		//FIX THIS BECAUSE IT BREAKS IF YOU CLICK ON THE TIMELINE
+// 		//relate the current day to the index number of the array
+// 		dayCount %= (result.length);//so that it can loop from the end time back to start
+// 		test.process(result[dayCount++]);
+// 	}
+// 	prevDay.day = gregorianDate.day;
+// });
