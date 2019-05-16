@@ -438,23 +438,23 @@ const polys = {
 				"coordinates": [
 					[
 						[
-							73.7095555132557,
+							74.7095555132557,
 							18.519353301628
 						],
 						[
-							73.8279497773742,
+							74.8279497773742,
 							18.5201243382124
 						],
 						[
-							73.8292775211227,
+							74.8292775211227,
 							18.3239923134439
 						],
 						[
-							73.7110172921879,
+							74.7110172921879,
 							18.3232300090661
 						],
 						[
-							73.7095555132557,
+							74.7095555132557,
 							18.519353301628
 						]
 					]
@@ -462,7 +462,7 @@ const polys = {
 			},
 			"properties": {
 				"source": "SkySat",
-				"product_name": "20190422_053948_ssc3_u0002",
+				"product_name": "20190422_052137_ssc2_u0002",
 				"final_resolution": 0.8,
 				"scene_start_time": "2019-04-22T01:39:48.396-04:00"//Skysat C3
 			}
@@ -557,18 +557,16 @@ const polyInfo = polys.features.map(feature => {
 
 const test = new Cesium.CzmlDataSource();
 /*
-TODO get the cone working, orientation is going to be in javascript because its so much easier, translation might be a bit harder
-then you can set the length of the cone again programmatically based on the distance between the satellite and the nearest not showing polygon
-we only do this calculation for the current satellite that is being tracked to be more efficient or for the polygon(s) that is/are upcoming.
-there can be multiple polygons that were taken at the same time so we should have an array of polygons, storing the ones that are coming up
-the most recently probably within the next lets say 5 min to start tho this value could change. this will happen inside the onTick() function
-so we want it to be as efficient as possible so that we lose as little fps as possible. this is why we don't calculate directions and such
-for every single polygon because we don't know the number of polygons there could be. to get the array of polygons within the next little bit,
-we can take advantage of the fact that the polygons are sorted in chronological order, so that when we hit the first polygon that isn't in the
-next little bit, we just break out of the loop. once the time passes of course, we can remove the polygon from the array. we can (possibly)
-show the line in advance just to show that the satellite is targeting this area next, and then flash the cone for about 1 second starting 1
-second before the capture time. then animate (probably a fade just cuz I know how to do them) the polygon getting filled in at the same time
-the cone is visible
+To get the cone working, orientation is going to be in javascript because its so much easier, translation might be a bit harder
+then you can set the length of the cone again programmatically based on the distance between the satellite and the nearest not showing polygon.
+We only do this calculation for the polygon(s) that is/are upcoming. There can be multiple polygons that were taken at the same time so we
+should have an array of polygons, storing the ones that are coming up the most recently probably within the next lets say 4 min to start tho
+this value could change. This will happen inside the onTick() function so we want it to be as efficient as possible so that we lose as little
+fps as possible. This is why we don't calculate directions and such for every single polygon because we don't know the number of polygons there
+could be. To get the array of polygons within the next little bit, we can take advantage of the fact that the polygons are sorted in chronological
+order, so that when we hit the first polygon that isn't in the next little bit, we handle the timeline clicks. Once the time passes of course, we
+can remove the polygon from the array. We can (possibly) show the line in advance just to show that the satellite is targeting this area next,
+and then show the cone for about 4 min starting before the capture time. Then show the polygon at the end of the cone's visibility
 
 https://cesiumjs.org/Cesium/Build/Apps/Sandcastle/index.html#c=zVdrb9s2FP0rhL9UBhTKTRsUcZxgWZpgBZImc9y02TwMtERbxCjSICk7ztD/3ktRD0p2lnQosOWLpUvec8596JJZEYVWjK6pQsdI0DU6o5rlGb4rbMGruHg9k8IQJqh61T+aiqlYgddSamaYFG2/M6IMPBHxBs+VzN7ThaJUB3vvDkL0duC8o+hasQUThIdISLGnpCGGJiiWgqK5VPCQLYliWgrsuDgVC5MC0/4AEJxeTIUBAVRjkiSBJ+Hc2jfB31OB4K+SOayfwmqBCTNE5Tb7F0su1bCOxL7h8fn7sNmhU7keIqNy6hmX7IHyW/ZIhyDPmb+Wy/GGM5FQ1aIxcjkmCcv1EA08mJk0RmbVyoG34qIflr/eQgZpU4zwbc14zUx6ypcpCQb4oF+qmoqv/aaAKSUJpLR0vSImxUZafiI0eBXFKgrNTJy+ZKOSnD+577DcaMt/y0RMkUkpcqVHTCMmCkMMVaUqRGsKXQU9YSSS87mmBjFjXWebYlvZEKWTkApeEqZobAuMnZKH0IX4GJYhbOrICZ9fVi1VQkVoHw+Omsz8mtvkCtfgZUiNrWju0wemT8WC02C7+T99/DD587cQ7Vms/hHyUvkjkO8BuQCroW3IPwL5CyBbrAK4ScfNC5RnOTdsyTdBO39hN+zQHxiNOejXwcztcGixPeFhHZ4RctMlb2cq7JJ5gaurNjO0tGIPb1q0pa1IrqesAwqsV7b7YcRpySnmchFsW6a9aa/6mAxRC+j643ps4ZjDfAy6Pm7fU0hRZLGoyCcKPkKYrVlTudqkMSXafLQf0aflRF7APEsuFMloUHE7KJ/Ah9xebehbWXpbV+bnzY0dv6f6Dj5ZqVpwYRl79bsN/5S9ou2UpiEt2dTVLo6XZ9VVqJ43TUq9j0nnM6NIbIKKqD5+dh+XQd9T7uHAbMsIh9MlqPnChtqp8TV2ltxogCELFpePnQ3Q3nIBvXxTyr2jXMb2PG30tyhKgsNBa/LXn8S4BL4Pdh8Le4eD/j+ULGgLCx1V2AnJdQK6YzovUtUo7FRqTDY7i9V0yG1MOFF+rpvD4jsrZ68lO5IGGtpvTaF0yuYGEv9faaz4m6dS27+7cNVwbkEqBgjEre0+ncatsgbNTaddb2fvf9dF7v788vL68//mLrc/eP4e5yQ/e5XbUZy6FNyKpi3JVX1A2O+72/MPT9qaJVbu6+fVfv7lw+TcU+eLe5Qym8igI7V/1At7I202nJ44x59YtoRjCOWKBxhHhmZLDmw6muXxX9TgWBcdOYoqp1HCVoglx9Ne5x+VaQ/FnGgNK/OcFyWd9k5GEexvuXEJRRKL6xVVnGzslvT1yaUzYoxHEbxuexkp+YwoD/Eb
 https://cesiumjs.org/Cesium/Build/Apps/Sandcastle/index.html#c=zVbtbtowFH0Viz8JUmbCuk4rpdXWjq2V2Ogoo6qW/TCJAWuOHdkOkFZ999lxQgjQbWjStEhI8f049/h+hQUSYEHwEgtwBhhegkssSRrDcS5znTA/XnKmEGFYOM3TgAVsob24IDPC6l6XSCj9htgRnAoev8czgbF026898Er/jnzfNwDGXSExw+oAd3hcAQSs1QIDSyDhhCmNmROGmCmiCJYQRZH7GDCgn4RLLeOsU3D2SrF2BB1QWJkn5JSLzpqOOcH+9cer0UX/a8+r7BKywvSWPOAOeOlvyHmqqE7T5R6Yu6vrUW/X9I5Eaq5RrOKpMKBogmmNmcIr1QGOvbOzTWUwnUqs9Y9g1QG+BzLDa41mngUWioSIWoA1t3FNDEeDm4JIwJ7WiR7ZUh2SaFvdwxL9cdjrfb7v9fuDu/8h1fbW/zjVetAwkHOe0qhIm+LAsdl0gBkK4NgmduwYRUTg0ORcT9LuFMl0ogQKlVvUoxyA/UPnNg2PXRTGRYyoLoG7juZVgS33kDPJKYaUz9wtlaEpuEJG8gkpQVYV15FATE41voR1kw/6qjdFO40x5SFRmVuyrwUo4E/8CtVC2CUyLGDv3Uo5h4oPUaQvJ90XJ/7mtUvXOKWKJDRz67Q8G8rbupAB0NUbE5nmiaoYblVpiLK9hSrDXWS3ukWQ2Mx02zfPgTUzU7mTLh29fqoKJOdkqnTCD2Z3/HfcyrjVW8HpT7bM2tkqNKa2R1ZXhP2SIoUF06JaN9iyudXQ1utp5c0CN8z0+oiwqG0JitnMrJO8OhvTr3hiWiuVZjtU4glXSocvNEd1n9hwJIg+9+WBS6Lm72gyR64P3zS398Yvc0UNeVyjXiZQE/m2r0e+b1Bb2qXZ/j3bfOs+Q+2B83jE3S2izdOG1+hKlVF8bh3fkjjhQoFUUBfClsJxQnU02Zqk4Q+sYCjz9ui2SqduRBaARGdBY+uPStAAIUVSas00pfkHJGicd1vavuZGuS4Jmw300qYoMybz9nnfCiGE3ZY+7nopzukEiQ3Enw
@@ -664,7 +662,7 @@ let nearPolys = [], newPrimitives: { [id: string]: any } = {};
 let satellites = test.entities;
 let coneMatrix = new Cesium.Matrix4();
 
-let sources = [];
+let geoJsonSources = [];
 for (let i = 0; i < polys.features.length; i++) {
 	Cesium.GeoJsonDataSource.load(polys.features[i], {
 		stroke: Cesium.Color.HOTPINK,
@@ -672,7 +670,7 @@ for (let i = 0; i < polys.features.length; i++) {
 	}).then(myDataSource => {
 		myDataSource.show = false;
 		viewer.dataSources.add(myDataSource);
-		sources.push(myDataSource);
+		geoJsonSources.push(myDataSource);
 	});
 }
 
@@ -688,6 +686,7 @@ let prevDay = Cesium.JulianDate.toGregorianDate(viewer.clock.startTime);
  * the face.
  */
 viewer.clock.onTick.addEventListener(clock => {
+	//Load the correct 24 packet of satellite data based on the current datetime
 	let gregorianDate = Cesium.JulianDate.toGregorianDate(clock.currentTime);
 	if (prevDay.day !== gregorianDate.day) {
 		dayCount = Math.floor(Cesium.JulianDate.daysDifference(clock.currentTime, viewer.clock.startTime));
@@ -702,14 +701,14 @@ viewer.clock.onTick.addEventListener(clock => {
 		if (secDiff <= 240) {//Only add polygons that are less than or equal to 5 minutes from being captured
 			if (secDiff > 0) {//and have not already been captured
 				//Search through the entire array and if polygon is not there then add it https://jsperf.com/dankmemes
-				sources[i].show = false;
+				geoJsonSources[i].show = false;
 				for (let j = 0; j < nearPolys.length; j++)
 					if (nearPolys[j][0].dayNumber == polyInfo[i][0].dayNumber && nearPolys[j][0].secondsOfDay == polyInfo[i][0].secondsOfDay)
 						continue polyInfo;
-				nearPolys.push(polyInfo[i]);
+				nearPolys.unshift(polyInfo[i]);
 			} else {
 				//Because there will only ever be 1 of each polygon in the array thanks to above, we only need to search until the first occurrence
-				sources[i].show = true;
+				geoJsonSources[i].show = true;
 				for (let j = 0; j < nearPolys.length; j++)
 					if (nearPolys[j][0].dayNumber == polyInfo[i][0].dayNumber && nearPolys[j][0].secondsOfDay == polyInfo[i][0].secondsOfDay) {
 						viewer.scene.primitives.remove(newPrimitives[nearPolys[j][1] + "cone"]);
@@ -718,14 +717,16 @@ viewer.clock.onTick.addEventListener(clock => {
 					}
 			}
 		} else {
+			//Handle in case user clicks on timeline
 			viewer.scene.primitives.remove(newPrimitives[polyInfo[i][1] + "cone"]);
-			sources[i].show = false;
+			geoJsonSources[i].show = false;
 			let index = nearPolys.indexOf(polyInfo[i]);
 			if (index > -1)
-				nearPolys.splice(index);
+				nearPolys.splice(0, index + 1);
 		}
 	}
 
+	//For each near-in-time polygon, figure out the position and orientation for the cone and render it
 	for (let i = 0; i < nearPolys.length; i++) {
 		posOfSat = satellites.getById('Satellite/' + nearPolys[i][1]).position.getValue(clock.currentTime);
 
@@ -745,9 +746,8 @@ viewer.clock.onTick.addEventListener(clock => {
 		Cesium.Cartesian3.multiplyByScalar(direction, halfLength, shiftPos);
 		Cesium.Cartesian3.add(posOfSat, shiftPos, shiftPos);
 
-		if (Cesium.defined(newPrimitives[nearPolys[i][1] + "cone"])) {
+		if (Cesium.defined(newPrimitives[nearPolys[i][1] + "cone"]))
 			viewer.scene.primitives.remove(newPrimitives[nearPolys[i][1] + "cone"]);
-		}
 
 		newPrimitives[nearPolys[i][1] + "cone"] = viewer.scene.primitives.add(new Cesium.Primitive({
 			geometryInstances: new Cesium.GeometryInstance({
