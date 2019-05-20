@@ -1369,6 +1369,20 @@ class CZMLPacket(_CZMLBaseObject):
 	# position = class_property(Position, 'position')
 
 	@property
+	def id(self):
+		if self._id is not None:
+			return self._id
+
+	@id.setter
+	def id(self, id):
+		if isinstance(id, str):
+			self._id = id
+		elif isinstance(id, basestring):
+			self._id = id
+		else:
+			raise TypeError
+
+	@property
 	def description(self):
 		if self._description is not None:
 			return self._description.data()

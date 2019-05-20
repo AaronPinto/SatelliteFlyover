@@ -1,13 +1,14 @@
-import czml from "./orbit.json";
+import czml from "./sentinel2Orbit.json";
+import polys from "./Sentinel2Polys.json";
 
 declare var Cesium: any;
 
-const viewer = new Cesium.Viewer('cesiumContainer', {
-	shouldAnimate: true,
-	skyAtmosphere: false,
-	imageryProvider: new Cesium.UrlTemplateImageryProvider({
-		url: `https://api.mapbox.com/styles/v1/skywatch-team/cjsgety8v0s2m1fo49t27s093/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2t5d2F0Y2gtdGVhbSIsImEiOiJjajgzMGlyNmk1ZTBqMnducWFidjNqZjU4In0.6f5beyt2YsWJcAPfxRYuEw`
-	})
+const viewer = new Cesium.Viewer("cesiumContainer", {
+    shouldAnimate: true,
+    skyAtmosphere: false,
+    imageryProvider: new Cesium.UrlTemplateImageryProvider({
+        url: `https://api.mapbox.com/styles/v1/skywatch-team/cjsgety8v0s2m1fo49t27s093/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2t5d2F0Y2gtdGVhbSIsImEiOiJjajgzMGlyNmk1ZTBqMnducWFidjNqZjU4In0.6f5beyt2YsWJcAPfxRYuEw`
+    })
 });
 viewer.scene.skyBox.destroy();
 viewer.scene.skyBox = undefined;
@@ -20,492 +21,20 @@ viewer.scene.fog.enabled = false;
 viewer.scene.globe.showGroundAtmosphere = false;
 viewer.scene.debugShowFramesPerSecond = true;
 
-const polys = {
-	"type": "FeatureCollection",
-	"features": [
-		{
-			"id": "3ad4bb1e-653f-11e9-ab8f-931ab064d08e",
-			"type": "Feature",
-			"geometry": {
-				"type": "Polygon",
-				"coordinates": [
-					[
-						[
-							16.684329518506,
-							49.3531991320591
-						],
-						[
-							16.8231907938923,
-							49.3510917449607
-						],
-						[
-							16.813605781116,
-							49.0899288496113
-						],
-						[
-							16.6754736682237,
-							49.0920170296222
-						],
-						[
-							16.684329518506,
-							49.3531991320591
-						]
-					]
-				]
-			},
-			"properties": {
-				"source": "SkySat",
-				"product_name": "20190422_124428_ssc8_u0001",
-				"final_resolution": 0.8,
-				"scene_start_time": "2019-04-22T08:44:28.761-04:00"//Skysat C8
-			}
-		},
-		{
-			"id": "4d1e753c-66b9-11e9-9a15-b3459543d5c3",
-			"type": "Feature",
-			"geometry": {
-				"type": "Polygon",
-				"coordinates": [
-					[
-						[
-							16.5487577839596,
-							49.5100114209987
-						],
-						[
-							16.8563177688673,
-							49.5054841445847
-						],
-						[
-							16.8534732461127,
-							49.4301681353662
-						],
-						[
-							16.5463840460467,
-							49.4346834569556
-						],
-						[
-							16.5487577839596,
-							49.5100114209987
-						]
-					]
-				]
-			},
-			"properties": {
-				"source": "SkySat",
-				"product_name": "20190423_093614_ssc2_u0001",
-				"final_resolution": 0.8,
-				"scene_start_time": "2019-04-23T05:36:14.939-04:00"//Skysat C2
-			}
-		},
-		{
-			"id": "36229b82-6778-11e9-902f-27b11a8dbb77",
-			"type": "Feature",
-			"geometry": {
-				"type": "Polygon",
-				"coordinates": [
-					[
-						[
-							16.6562559706977,
-							49.2279886803489
-						],
-						[
-							16.7816446711278,
-							49.2261222933622
-						],
-						[
-							16.7728366098145,
-							48.9795425445878
-						],
-						[
-							16.648067091976,
-							48.981392876583
-						],
-						[
-							16.6562559706977,
-							49.2279886803489
-						]
-					]
-				]
-			},
-			"properties": {
-				"source": "SkySat",
-				"product_name": "20190425_093207_ssc4_u0001",
-				"final_resolution": 0.8,
-				"scene_start_time": "2019-04-25T05:32:07.385-04:00"//Skysat C4
-			}
-		},
-		{
-			"id": "155c90b0-66ba-11e9-8685-1b852229804d",
-			"type": "Feature",
-			"geometry": {
-				"type": "Polygon",
-				"coordinates": [
-					[
-						[
-							16.6287238379485,
-							49.7059880680719
-						],
-						[
-							16.7558391933738,
-							49.7041303339559
-						],
-						[
-							16.7466323593146,
-							49.4469010577707
-						],
-						[
-							16.620182799348,
-							49.4487420818486
-						],
-						[
-							16.6287238379485,
-							49.7059880680719
-						]
-					]
-				]
-			},
-			"properties": {
-				"source": "SkySat",
-				"product_name": "20190424_122403_ssc9_u0001",
-				"final_resolution": 0.8,
-				"scene_start_time": "2019-04-24T08:24:03.134-04:00"//Skysat C9
-			}
-		},
-		{
-			"id": "a100a14a-6798-11e9-b971-0768d821c9fd",
-			"type": "Feature",
-			"geometry": {
-				"type": "Polygon",
-				"coordinates": [
-					[
-						[
-							16.595956087764,
-							49.3116414140985
-						],
-						[
-							16.7143662600647,
-							49.3099451052511
-						],
-						[
-							16.7062625964765,
-							49.0749484141484
-						],
-						[
-							16.5884115425794,
-							49.0766308073314
-						],
-						[
-							16.595956087764,
-							49.3116414140985
-						]
-					]
-				]
-			},
-			"properties": {
-				"source": "SkySat",
-				"product_name": "20190425_123305_ssc11_u0001",
-				"final_resolution": 0.8,
-				"scene_start_time": "2019-04-25T08:33:05.297-04:00"//Skysat C11
-			}
-		},
-		{
-			"id": "8aa11fd8-66bc-11e9-84b7-6f8c152af4aa",
-			"type": "Feature",
-			"geometry": {
-				"type": "Polygon",
-				"coordinates": [
-					[
-						[
-							16.2262185858662,
-							49.7409993975507
-						],
-						[
-							16.5194258135946,
-							49.7375242651875
-						],
-						[
-							16.5116026517736,
-							49.4852584634352
-						],
-						[
-							16.2199040538085,
-							49.4887029307305
-						],
-						[
-							16.2262185858662,
-							49.7409993975507
-						]
-					]
-				]
-			},
-			"properties": {
-				"source": "SkySat",
-				"product_name": "20190424_123854_ssc10_u0001",
-				"final_resolution": 0.8,
-				"scene_start_time": "2019-04-24T08:38:54.362-04:00"//Skysat C10
-			}
-		},
-		{
-			"id": "706cd9e4-6799-11e9-9a45-f35ebcffb87b",
-			"type": "Feature",
-			"geometry": {
-				"type": "Polygon",
-				"coordinates": [
-					[
-						[
-							16.6315766951624,
-							49.3253570409926
-						],
-						[
-							16.7471235224098,
-							49.3236676658795
-						],
-						[
-							16.7383760749958,
-							49.074785755718
-						],
-						[
-							16.6234071212927,
-							49.0764604562217
-						],
-						[
-							16.6315766951624,
-							49.3253570409926
-						]
-					]
-				]
-			},
-			"properties": {
-				"source": "SkySat",
-				"product_name": "20190425_123139_ssc11_u0001",
-				"final_resolution": 0.8,
-				"scene_start_time": "2019-04-25T08:31:39.301-04:00"//Skysat C11
-			}
-		},
-		{
-			"id": "75e3c800-7005-11e9-b094-0fea437b3c69",
-			"type": "Feature",
-			"geometry": {
-				"type": "Polygon",
-				"coordinates": [
-					[
-						[
-							-97.8211597144768,
-							30.3632478051884
-						],
-						[
-							-97.6897710430842,
-							30.3619966433198
-						],
-						[
-							-97.6922499443018,
-							30.1751788207701
-						],
-						[
-							-97.8233901812642,
-							30.1764206938463
-						],
-						[
-							-97.8211597144768,
-							30.3632478051884
-						]
-					]
-				]
-			},
-			"properties": {
-				"source": "SkySat",
-				"product_name": "20190505_170650_ssc4_u0001",
-				"final_resolution": 0.8,
-				"scene_start_time": "2019-05-05T13:06:50.167-04:00"//Skysat C4
-			}
-		},
-		{
-			"id": "ef0b4704-6ba9-11e9-8a47-3326fa6a2b7d",
-			"type": "Feature",
-			"geometry": {
-				"type": "Polygon",
-				"coordinates": [
-					[
-						[
-							16.4691855677588,
-							49.7224780378755
-						],
-						[
-							16.6171002966163,
-							49.7205071268472
-						],
-						[
-							16.6089923704476,
-							49.4747548357746
-						],
-						[
-							16.4618185884615,
-							49.4767088041668
-						],
-						[
-							16.4691855677588,
-							49.7224780378755
-						]
-					]
-				]
-			},
-			"properties": {
-				"source": "SkySat",
-				"product_name": "20190430_124705_ssc6_u0001",
-				"final_resolution": 0.8,
-				"scene_start_time": "2019-04-30T08:47:05.814-04:00"//Skycat C6
-			}
-		},
-		{
-			"id": "3c8c6958-6c2d-11e9-87ad-6bff64da80d5",
-			"type": "Feature",
-			"geometry": {
-				"type": "Polygon",
-				"coordinates": [
-					[
-						[
-							16.7045826818325,
-							49.2235000309816
-						],
-						[
-							16.8077863723052,
-							49.2219305320959
-						],
-						[
-							16.8010882710747,
-							49.0374219077108
-						],
-						[
-							16.698266502228,
-							49.0389812918125
-						],
-						[
-							16.7045826818325,
-							49.2235000309816
-						]
-					]
-				]
-			},
-			"properties": {
-				"source": "SkySat",
-				"product_name": "20190501_100621_ssc1_u0001",
-				"final_resolution": 0.8,
-				"scene_start_time": "2019-05-01T06:06:21.32-04:00"//Skysat C1
-			}
-		},
-		{
-			"id": "28d67136-6c2f-11e9-a504-8b6ca9120d25",
-			"type": "Feature",
-			"geometry": {
-				"type": "Polygon",
-				"coordinates": [
-					[
-						[
-							16.6317229748762,
-							49.7024413515085
-						],
-						[
-							16.7488600510482,
-							49.7007314248164
-						],
-						[
-							16.7405770858544,
-							49.4685240964588
-						],
-						[
-							16.6239941780171,
-							49.470220131995
-						],
-						[
-							16.6317229748762,
-							49.7024413515085
-						]
-					]
-				]
-			},
-			"properties": {
-				"source": "SkySat",
-				"product_name": "20190501_100652_ssc1_u0001",
-				"final_resolution": 0.8,
-				"scene_start_time": "2019-05-01T06:06:52.435-04:00"//Skysat C1
-			}
-		},
-		{
-			"id": "4edc650a-6ce5-11e9-9795-c32ce2a00f6e",
-			"type": "Feature",
-			"geometry": {
-				"type": "Polygon",
-				"coordinates": [
-					[
-						[
-							74.7095555132557,
-							18.519353301628
-						],
-						[
-							74.8279497773742,
-							18.5201243382124
-						],
-						[
-							74.8292775211227,
-							18.3239923134439
-						],
-						[
-							74.7110172921879,
-							18.3232300090661
-						],
-						[
-							74.7095555132557,
-							18.519353301628
-						]
-					]
-				]
-			},
-			"properties": {
-				"source": "SkySat",
-				"product_name": "20190422_052137_ssc2_u0002",
-				"final_resolution": 0.8,
-				"scene_start_time": "2019-04-22T01:39:48.396-04:00"//Skysat C3
-			}
-		},
-		{
-			"id": "c34d79f6-6cea-11e9-8b29-d7cb12f2995c",
-			"type": "Feature",
-			"geometry": {
-				"type": "Polygon",
-				"coordinates": [
-					[
-						[
-							73.7156190001055,
-							18.5526698982835
-						],
-						[
-							73.8367953791127,
-							18.5534554805575
-						],
-						[
-							73.8381032773311,
-							18.3591741855225
-						],
-						[
-							73.71706306126,
-							18.3583974026817
-						],
-						[
-							73.7156190001055,
-							18.5526698982835
-						]
-					]
-				]
-			},
-			"properties": {
-				"source": "SkySat",
-				"product_name": "20190422_052127_ssc2_u0002",
-				"final_resolution": 0.8,
-				"scene_start_time": "2019-04-22T01:21:27.531-04:00"//Skysat C2
-			}
-		}
-	]
-};
+const rot90 = Cesium.Matrix3.fromRotationY(Cesium.Math.toRadians(-90));
+const test = new Cesium.CzmlDataSource();
+
+let posOfSat = new Cesium.Cartesian3(),
+    direction = new Cesium.Cartesian3(),
+    directionRay = new Cesium.Cartesian3(),
+    shiftPos = new Cesium.Cartesian3();
+let rotationMatrix = new Cesium.Matrix3();
+let coneMatrix = new Cesium.Matrix4();
+let nearPolys = [],
+    geoJsonSources = [],
+    result = [];
+let primitives: { [id: string]: any } = {};
+let satellites = test.entities;
 
 // Safety pig has arrived to make sure our code works as intended!
 //
@@ -523,39 +52,76 @@ const polys = {
 //        /,_|  |   /,_/   /
 //           /,_/      '`-'
 //
-polys.features = polys.features.map(feature => {
-	feature.id = feature.properties.product_name;
-	return feature;
-}).sort((a, b) => {
-	return a.properties.scene_start_time < b.properties.scene_start_time ? -1 : 1;
+
+//Sort polys by their start time, find the corresponding time key (differs by source)
+polys.features = polys.features.sort((a, b) => {
+    return a.properties[
+        Object.keys(a.properties).filter(key => {
+            return key.includes("time");
+        })[0]
+    ] <
+        b.properties[
+            Object.keys(b.properties).filter(key => {
+                return key.includes("time");
+            })[0]
+        ]
+        ? -1
+        : 1;
 });
 
 const polyInfo = polys.features.map(feature => {
-	//Figure out which source its from, then parse and return the datetime and which satellite it is
-	switch (feature.properties.source) {
-		case "SkySat": {
-			let prodname = feature.properties.product_name.split("_");
-			let st = prodname[0].concat(prodname[1]);
-			let pattern = /(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})/;//Parse to ISO 8601 in UTC
-			let dt = Cesium.JulianDate.fromDate(new Date(st.replace(pattern, '$1-$2-$3T$4:$5:$6Z')));
+    //Figure out which source its from, then parse and return the datetime, which satellite it is and the centroid
+    switch (feature.properties.source) {
+        case "SkySat": {
+            let prodname = feature.properties.product_name.split("_");
+            let st = prodname[0].concat(prodname[1]);
+            let pattern = /(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})/; //Parse to ISO 8601 in UTC
+            let dt = Cesium.JulianDate.fromDate(
+                new Date(st.replace(pattern, "$1-$2-$3T$4:$5:$6Z"))
+            );
 
-			let vertices = feature.geometry.coordinates[0];//smh GeoJSON with its array nesting
-			let targetPoints = compute2DPolygonCentroid(vertices, vertices.length);
+            let vertices = feature.geometry.coordinates[0]; //smh GeoJSON with its array nesting
+            let targetPoints = compute2DPolygonCentroid(vertices, vertices.length);
 
-			return [dt, "SKYSAT-".concat(prodname[2].slice(2).toUpperCase()),
-				Cesium.Cartesian3.fromDegrees(targetPoints[0], targetPoints[1])];
-		}
-		case "Kompsat": {
-			//TODO Get sample data and figure out how to do this
-			break;
-		}
-		default: {
-			alert("This source, ${feature.properties.source}, isn't supported yet");
-		}
-	}
+            return [
+                dt,
+                "SKYSAT-".concat(prodname[2].slice(2).toUpperCase()),
+                Cesium.Cartesian3.fromDegrees(targetPoints[0], targetPoints[1])
+            ];
+        }
+        case "Sentinel-2": {
+            let prodname = feature.properties.name.split("_");
+            let pattern = /(\d{4})(\d{2})(\d{2})T(\d{2})(\d{2})(\d{2})/; //Parse to ISO 8601 in UTC
+            let dt = Cesium.JulianDate.fromDate(
+                new Date(prodname[2].replace(pattern, "$1-$2-$3T$4:$5:$6Z"))
+            );
+
+            let vertices = feature.geometry.coordinates[0];
+            let targetPoints = compute2DPolygonCentroid(vertices, vertices.length);
+
+            return [
+                dt,
+                "SENTINEL-".concat(prodname[0].slice(1)),
+                Cesium.Cartesian3.fromDegrees(targetPoints[0], targetPoints[1])
+            ];
+        }
+        default: {
+            alert("This source, ${feature.properties.source}, isn't supported yet");
+        }
+    }
 });
 
-const test = new Cesium.CzmlDataSource();
+for (let i = 0; i < polys.features.length; i++) {
+    Cesium.GeoJsonDataSource.load(polys.features[i], {
+        stroke: Cesium.Color.HOTPINK,
+        fill: Cesium.Color.PINK
+    }).then(myDataSource => {
+        myDataSource.show = false;
+        viewer.dataSources.add(myDataSource);
+        geoJsonSources.push(myDataSource);
+    });
+}
+
 /*
 To get the cone working, orientation is going to be in javascript because its so much easier, translation might be a bit harder
 then you can set the length of the cone again programmatically based on the distance between the satellite and the nearest not showing polygon.
@@ -577,102 +143,91 @@ https://cesiumjs.org/Cesium/Apps/Sandcastle/index.html#c=fVHJTsMwEP0VK5cmIjhpKZc
 
 //https://stackoverflow.com/questions/2792443/finding-the-centroid-of-a-polygon
 function compute2DPolygonCentroid(vertices, vertexCount) {
-	let centroid = [0, 0];
-	let signedArea = 0.0;
-	let x0 = 0.0; // Current vertex X
-	let y0 = 0.0; // Current vertex Y
-	let x1 = 0.0; // Next vertex X
-	let y1 = 0.0; // Next vertex Y
-	let a = 0.0;  // Partial signed area
+    let centroid = [0, 0];
+    let signedArea = 0.0;
+    let x0 = 0.0; //Current vertex X
+    let y0 = 0.0; //Current vertex Y
+    let x1 = 0.0; //Next vertex X
+    let y1 = 0.0; //Next vertex Y
+    let a = 0.0; //Partial signed area
 
-	// For all vertices except last
-	let i: number;
-	for (i = 0; i < vertexCount - 1; i++) {
-		x0 = vertices[i][0];
-		y0 = vertices[i][1];
-		x1 = vertices[i + 1][0];
-		y1 = vertices[i + 1][1];
-		a = x0 * y1 - x1 * y0;
-		signedArea += a;
-		centroid[0] += (x0 + x1) * a;
-		centroid[1] += (y0 + y1) * a;
-	}
+    //For all vertices except last
+    let i: number;
+    for (i = 0; i < vertexCount - 1; i++) {
+        x0 = vertices[i][0];
+        y0 = vertices[i][1];
+        x1 = vertices[i + 1][0];
+        y1 = vertices[i + 1][1];
+        a = x0 * y1 - x1 * y0;
+        signedArea += a;
+        centroid[0] += (x0 + x1) * a;
+        centroid[1] += (y0 + y1) * a;
+    }
 
-	// Do last vertex separately to avoid performing an expensive
-	// modulus operation in each iteration.
-	x0 = vertices[i][0];
-	y0 = vertices[i][1];
-	x1 = vertices[0][0];
-	y1 = vertices[0][1];
-	a = x0 * y1 - x1 * y0;
-	signedArea += a;
-	centroid[0] += (x0 + x1) * a;
-	centroid[1] += (y0 + y1) * a;
+    //Do last vertex separately to avoid performing an expensive
+    //modulus operation in each iteration.
+    x0 = vertices[i][0];
+    y0 = vertices[i][1];
+    x1 = vertices[0][0];
+    y1 = vertices[0][1];
+    a = x0 * y1 - x1 * y0;
+    signedArea += a;
+    centroid[0] += (x0 + x1) * a;
+    centroid[1] += (y0 + y1) * a;
 
-	signedArea *= 0.5;
-	centroid[0] /= (6.0 * signedArea);
-	centroid[1] /= (6.0 * signedArea);
+    signedArea *= 0.5;
+    centroid[0] /= 6.0 * signedArea;
+    centroid[1] /= 6.0 * signedArea;
 
-	return centroid;
+    return centroid;
 }
 
 //Group packets by 24 period TODO: probably make this better with array.slice()
-let temp = [], result = [];
-for (let i = 0; i < czml.length; i++) {
-	if (czml[i].id !== czml[1].id)
-		temp.push(czml[i]);
-	else {
-		result.push(temp);
-		temp = [];
-		temp.push(czml[i]);
-	}
+function groupPackets() {
+    let temp = [];
+    for (let i = 0; i < czml.length; i++) {
+        if (czml[i].id !== czml[1].id) temp.push(czml[i]);
+        else {
+            result.push(temp);
+            temp = [];
+            temp.push(czml[i]);
+        }
+    }
+    result.push(temp);
 }
-result.push(temp);
+
+groupPackets();
 
 let dayCount = 0;
-test.process(result.shift());//document packet
-test.process(result[dayCount]);//1st satellites' packet
+test.process(result.shift()); //document packet
+test.process(result[dayCount]); //1st satellites' packet
 
 viewer.dataSources.add(test);
 
 //Add drop down menu that lets user track any satellite that is loaded
-let options = result[1].map(satellite => {
-	return satellite.label.text;
-}).sort();
+function addTrackingMenu() {
+    let options = result[1]
+        .map(satellite => {
+            return satellite.label.text;
+        })
+        .sort();
 
-let menu = document.createElement('select');
-menu.className = 'tracking-menu';
-menu.onchange = () => {
-	let item = options[menu.selectedIndex];
-	viewer.trackedEntity = test.entities.getById('Satellite/' + item);
-	viewer.trackedEntity.viewFrom = new Cesium.Cartesian3(-100, 0, 200000);
-};
-for (let i = 0; i < options.length; i++) {
-	let option = document.createElement('option');
-	option.textContent = options[i];
-	menu.appendChild(option);
+    let menu = document.createElement("select");
+    menu.className = "tracking-menu";
+    menu.onchange = () => {
+        let item = options[menu.selectedIndex];
+        viewer.trackedEntity = test.entities.getById("Satellite/" + item);
+        viewer.trackedEntity.viewFrom = new Cesium.Cartesian3(-100, 0, 200000);
+    };
+    for (let i = 0; i < options.length; i++) {
+        let option = document.createElement("option");
+        option.textContent = options[i];
+        menu.appendChild(option);
+    }
+    document.body.appendChild(menu);
 }
-document.body.appendChild(menu);
 
-const rot90 = Cesium.Matrix3.fromRotationY(Cesium.Math.toRadians(-90));
-let posOfSat = new Cesium.Cartesian3(), direction = new Cesium.Cartesian3(),
-	directionRay = new Cesium.Cartesian3(), shiftPos = new Cesium.Cartesian3();
-let rotationMatrix = new Cesium.Matrix3();
-let nearPolys = [], newPrimitives: { [id: string]: any } = {};
-let satellites = test.entities;
-let coneMatrix = new Cesium.Matrix4();
-
-let geoJsonSources = [];
-for (let i = 0; i < polys.features.length; i++) {
-	Cesium.GeoJsonDataSource.load(polys.features[i], {
-		stroke: Cesium.Color.HOTPINK,
-		fill: Cesium.Color.PINK,
-	}).then(myDataSource => {
-		myDataSource.show = false;
-		viewer.dataSources.add(myDataSource);
-		geoJsonSources.push(myDataSource);
-	});
-}
+addTrackingMenu();
 
 let prevDay = Cesium.JulianDate.toGregorianDate(viewer.clock.startTime);
 
@@ -686,121 +241,108 @@ let prevDay = Cesium.JulianDate.toGregorianDate(viewer.clock.startTime);
  * the face.
  */
 viewer.clock.onTick.addEventListener(clock => {
-	//Load the correct 24 packet of satellite data based on the current datetime
-	let gregorianDate = Cesium.JulianDate.toGregorianDate(clock.currentTime);
-	if (prevDay.day !== gregorianDate.day) {
-		dayCount = Math.floor(Cesium.JulianDate.daysDifference(clock.currentTime, viewer.clock.startTime));
-		dayCount %= result.length;//so that it can loop from the end time back to start
+    //Load the correct 24 packet of satellite data based on the current datetime
+    let gregorianDate = Cesium.JulianDate.toGregorianDate(clock.currentTime);
+    if (prevDay.day !== gregorianDate.day) {
+        dayCount = Math.floor(
+            Cesium.JulianDate.daysDifference(clock.currentTime, viewer.clock.startTime)
+        );
+        dayCount %= result.length; //so that it can loop from the end time back to start
 
-		test.process(result[dayCount]);
-	}
-	prevDay.day = gregorianDate.day;
+        test.process(result[dayCount]);
+    }
+    prevDay.day = gregorianDate.day;
 
-	polyInfo: for (let i = 0; i < polyInfo.length; i++) {
-		let secDiff = Cesium.JulianDate.secondsDifference(polyInfo[i][0], clock.currentTime);
-		if (secDiff <= 240) {//Only add polygons that are less than or equal to 5 minutes from being captured
-			if (secDiff > 0) {//and have not already been captured
-				//Search through the entire array and if polygon is not there then add it https://jsperf.com/dankmemes
-				geoJsonSources[i].show = false;
-				for (let j = 0; j < nearPolys.length; j++)
-					if (nearPolys[j][0].dayNumber == polyInfo[i][0].dayNumber && nearPolys[j][0].secondsOfDay == polyInfo[i][0].secondsOfDay)
-						continue polyInfo;
-				nearPolys.unshift(polyInfo[i]);
-			} else {
-				//Because there will only ever be 1 of each polygon in the array thanks to above, we only need to search until the first occurrence
-				geoJsonSources[i].show = true;
-				for (let j = 0; j < nearPolys.length; j++)
-					if (nearPolys[j][0].dayNumber == polyInfo[i][0].dayNumber && nearPolys[j][0].secondsOfDay == polyInfo[i][0].secondsOfDay) {
-						viewer.scene.primitives.remove(newPrimitives[nearPolys[j][1] + "cone"]);
-						nearPolys.splice(j, 1);
-						break;
-					}
-			}
-		} else {
-			//Handle in case user clicks on timeline
-			viewer.scene.primitives.remove(newPrimitives[polyInfo[i][1] + "cone"]);
-			geoJsonSources[i].show = false;
-			let index = nearPolys.indexOf(polyInfo[i]);
-			if (index > -1)
-				nearPolys.splice(0, index + 1);
-		}
-	}
+    polyInfo: for (let i = 0; i < polyInfo.length; i++) {
+        let secDiff = Cesium.JulianDate.secondsDifference(polyInfo[i][0], clock.currentTime);
+        //Only add polygons that are less than or equal to 4 minutes from being captured...
+        if (secDiff <= 240) {
+            //and have not already been captured
+            if (secDiff > 0) {
+                //Search through the entire array and if polygon is not there then add it https://jsperf.com/dankmemes
+                geoJsonSources[i].show = false;
+                for (let j = 0; j < nearPolys.length; j++)
+                    if (
+                        nearPolys[j][0].dayNumber == polyInfo[i][0].dayNumber &&
+                        nearPolys[j][0].secondsOfDay == polyInfo[i][0].secondsOfDay
+                    )
+                        continue polyInfo;
+                nearPolys.unshift(polyInfo[i]);
+            } else {
+                //Because there will only ever be 1 of each polygon in the array thanks to above, we only need to search until the first occurrence
+                geoJsonSources[i].show = true;
+                for (let j = 0; j < nearPolys.length; j++)
+                    if (
+                        nearPolys[j][0].dayNumber == polyInfo[i][0].dayNumber &&
+                        nearPolys[j][0].secondsOfDay == polyInfo[i][0].secondsOfDay
+                    ) {
+                        viewer.scene.primitives.remove(primitives[nearPolys[j][1] + "cone"]);
+                        nearPolys.splice(j, 1);
+                        break;
+                    }
+            }
+        } else {
+            //Handle in case user clicks on timeline
+            viewer.scene.primitives.remove(primitives[polyInfo[i][1] + "cone"]);
+            geoJsonSources[i].show = false;
+            let index = nearPolys.indexOf(polyInfo[i]);
+            if (index > -1) nearPolys.splice(0, index + 1);
+        }
+    }
 
-	//For each near-in-time polygon, figure out the position and orientation for the cone and render it
-	for (let i = 0; i < nearPolys.length; i++) {
-		posOfSat = satellites.getById('Satellite/' + nearPolys[i][1]).position.getValue(clock.currentTime);
+    //For each near-in-time polygon, figure out the position and orientation for the cone and render it
+    for (let i = 0; i < nearPolys.length; i++) {
+        posOfSat = satellites
+            .getById("Satellite/" + nearPolys[i][1])
+            .position.getValue(clock.currentTime);
 
-		Cesium.Cartesian3.subtract(nearPolys[i][2], posOfSat, direction);
-		let length = Cesium.Cartesian3.magnitude(direction);
-		let halfLength = length / 2.0;
-		Cesium.Cartesian3.normalize(direction, direction);
+        Cesium.Cartesian3.subtract(nearPolys[i][2], posOfSat, direction);
+        let length = Cesium.Cartesian3.magnitude(direction);
+        let halfLength = length / 2.0;
+        Cesium.Cartesian3.normalize(direction, direction);
 
-		rotationMatrix = Cesium.Transforms.rotationMatrixFromPositionVelocity(posOfSat, direction);
-		Cesium.Matrix3.multiply(rotationMatrix, rot90, rotationMatrix);
+        rotationMatrix = Cesium.Transforms.rotationMatrixFromPositionVelocity(posOfSat, direction);
+        Cesium.Matrix3.multiply(rotationMatrix, rot90, rotationMatrix);
 
-		// Visualize direction
-		Cesium.Cartesian3.multiplyByScalar(direction, length, directionRay);
-		Cesium.Cartesian3.add(posOfSat, directionRay, directionRay);
+        //Visualize direction
+        Cesium.Cartesian3.multiplyByScalar(direction, length, directionRay);
+        Cesium.Cartesian3.add(posOfSat, directionRay, directionRay);
 
-		//Shift cone position so that the apex is at the satellite, cone should point to 'target' from 'origin'
-		Cesium.Cartesian3.multiplyByScalar(direction, halfLength, shiftPos);
-		Cesium.Cartesian3.add(posOfSat, shiftPos, shiftPos);
+        //Shift cone position so that the apex is at the satellite, cone should point to 'target' from 'origin'
+        Cesium.Cartesian3.multiplyByScalar(direction, halfLength, shiftPos);
+        Cesium.Cartesian3.add(posOfSat, shiftPos, shiftPos);
 
-		if (Cesium.defined(newPrimitives[nearPolys[i][1] + "cone"]))
-			viewer.scene.primitives.remove(newPrimitives[nearPolys[i][1] + "cone"]);
+        if (Cesium.defined(primitives[nearPolys[i][1] + "cone"]))
+            viewer.scene.primitives.remove(primitives[nearPolys[i][1] + "cone"]);
 
-		newPrimitives[nearPolys[i][1] + "cone"] = viewer.scene.primitives.add(new Cesium.Primitive({
-			geometryInstances: new Cesium.GeometryInstance({
-				geometry: new Cesium.CylinderGeometry({
-					length: length,
-					topRadius: 10,
-					bottomRadius: 9000,
-				}),
-				attributes: {
-					color: new Cesium.ColorGeometryInstanceAttribute(0.0, 0.4, 1.0, 0.7)
-				},
-			}),
-			modelMatrix: Cesium.Matrix4.fromRotationTranslation(rotationMatrix, shiftPos, coneMatrix),
-			appearance: new Cesium.PerInstanceColorAppearance({
-				flat: true,
-				translucent: true,
-				closed: true
-			}),
-			asynchronous: false,
-			show: true,
-		}));
-	}
+        primitives[nearPolys[i][1] + "cone"] = viewer.scene.primitives.add(
+            new Cesium.Primitive({
+                geometryInstances: new Cesium.GeometryInstance({
+                    geometry: new Cesium.CylinderGeometry({
+                        length: length,
+                        topRadius: 10,
+                        bottomRadius: 9000
+                    }),
+                    attributes: {
+                        color: new Cesium.ColorGeometryInstanceAttribute(0.0, 0.4, 1.0, 0.7)
+                    }
+                }),
+                modelMatrix: Cesium.Matrix4.fromRotationTranslation(
+                    rotationMatrix,
+                    shiftPos,
+                    coneMatrix
+                ),
+                appearance: new Cesium.PerInstanceColorAppearance({
+                    flat: true,
+                    translucent: true,
+                    closed: true
+                }),
+                asynchronous: false,
+                show: true
+            })
+        );
+    }
 });
-
-const flags = new Set();
-const uniquePolyInfo = polyInfo.filter(entry => {
-	if (flags.has(entry[1]))
-		return false;
-	flags.add(entry[1]);
-	return true;
-});
-
-for (let i = 0; i < uniquePolyInfo.length; i++) {
-	newPrimitives[uniquePolyInfo[i][1] + "cone"] = viewer.scene.primitives.add(new Cesium.Primitive({
-		geometryInstances: new Cesium.GeometryInstance({
-			geometry: new Cesium.CylinderGeometry({
-				length: length,
-				topRadius: 0,
-				bottomRadius: 3000,
-			}),
-			attributes: {
-				color: new Cesium.ColorGeometryInstanceAttribute(0.0, 0.4, 1.0, 0.7)
-			},
-		}),
-		appearance: new Cesium.PerInstanceColorAppearance({
-			flat: true,
-			translucent: true,
-			closed: true
-		}),
-		show: false,
-		releaseGeometryInstances: false
-	}));
-}
 
 // viewer.entities.add({
 // 	polyline: {

@@ -244,13 +244,14 @@ def get_satellite_orbit(raw_tle, sim_start_time, sim_end_time, czml_file_name):
 	doc.write(czml_file_name)
 
 
-def read_tles(tle_file_name, rgbs):
-	tle_src = open(tle_file_name, 'r')
+def read_tles(tle_array, tle_file_name, rgbs):
+	if tle_file_name:
+		tle_array = open(tle_file_name, 'r')
 	raw_tle = []
 	sats = []
 
 	i = 1
-	for line in tle_src:
+	for line in tle_array:
 		raw_tle.append(line)
 
 		if i % 3 == 0:
@@ -262,11 +263,10 @@ def read_tles(tle_file_name, rgbs):
 	return sats
 
 
-def create_czml(inputfile_path, outputfile_path=None, start_time=None, end_time=None, time_list=None):
-	"""Takes in a file of TLE's and returns a CZML file visualising their orbits."""
+def create_czml(tle_array=None, inputfile_path=None, outputfile_path=None, start_time=None, end_time=None, time_list=None):
+	"""Takes in an array or a file of TLE's and returns a CZML file visualising their orbits."""
 
-	rgbs = Colors()
-	satellite_array = read_tles(inputfile_path, rgbs)
+	satellite_array = read_tles(tle_array, inputfile_path, Colors())
 
 	if not start_time:
 		start_time = datetime.utcnow().replace(tzinfo=pytz.UTC)
@@ -276,7 +276,7 @@ def create_czml(inputfile_path, outputfile_path=None, start_time=None, end_time=
 
 	doc = create_czml_file(start_time, end_time)
 
-	if time_list is not None and len(time_list) > 1:
+	if time_list and len(time_list) > 1:
 		for i in range(len(time_list) - 1):
 			for sat in satellite_array:
 				sat_name = sat.sat_name
@@ -309,5 +309,5 @@ def create_czml(inputfile_path, outputfile_path=None, start_time=None, end_time=
 			doc.packets.append(sat_packet)
 
 	if not outputfile_path:
-		outputfile_path = "orbit.json"
+		outputfile_path = "orbit2.json"
 	doc.write(outputfile_path)
