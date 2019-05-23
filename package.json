@@ -5,7 +5,7 @@
     "main": "index.html",
     "scripts": {
         "start": "webpack-dev-server --port 9000 --inline --progress --profile --colors --watch --content-base ./ --mode development",
-        "fix": "prettier --write --print-width 100 --tab-width 4 ./**.{ts,json,js}"
+        "fix": "prettier --write --print-width 110 --tab-width 4 ./**.{ts,json,js}"
     },
     "devDependencies": {
         "geojson": "^0.5.0",

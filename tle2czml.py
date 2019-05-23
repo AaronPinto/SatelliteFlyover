@@ -9,7 +9,7 @@ from czml import CZML, CZMLPacket, Description, Billboard, Label, Path, Position
 
 BILLBOARD_SCALE = 1.5
 SATELITE_IMAGE_URI = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADJSURBVDhPnZHRDcMgEEMZjVEYpaNklIzSEfLfD4qNnXAJSFWfhO7w2Zc0Tf9QG2rXrEzSUeZLOGm47WoH95x3Hl3jEgilvDgsOQUTqsNl68ezEwn1vae6lceSEEYvvWNT/Rxc4CXQNGadho1NXoJ+9iaqc2xi2xbt23PJCDIB6TQjOC6Bho/sDy3fBQT8PrVhibU7yBFcEPaRxOoeTwbwByCOYf9VGp1BYI1BA+EeHhmfzKbBoJEQwn1yzUZtyspIQUha85MpkNIXB7GizqDEECsAAAAASUVORK5CYII="
-LABEL_FONT = "11pt Lucida Console"
+LABEL_FONT = "15px Lucida Console"
 
 MULTIPLIER = 60
 DESCRIPTION_TEMPLATE = 'Orbit of Satellite: '
@@ -105,6 +105,7 @@ def create_label(sat_id, rgba):
 	lab.pixelOffset = {"cartesian2": [12, 0]}
 	lab.style = 'FILL_AND_OUTLINE'
 	lab.verticalOrigin = 'CENTER'
+	lab.scale = 1.0
 	return lab
 
 

@@ -879,7 +879,7 @@ class Point(_CZMLBaseObject):
 		d = {}
 		if self.show:
 			d['show'] = True
-		if self.show == False:
+		if not self.show:
 			d['show'] = False
 		if self.color:
 			d['color'] = self.color
@@ -915,7 +915,8 @@ class Label(_CZMLBaseObject):
 	font = None
 	outlineColor = None
 	outlineWidth = None
-
+	style = None
+	verticalOrigin = None
 	# edit end
 
 	def __init__(self, text=None, show=False):
@@ -932,6 +933,8 @@ class Label(_CZMLBaseObject):
 			d['text'] = self.text
 		if self.horizontalOrigin:
 			d['horizontalOrigin'] = self.horizontalOrigin
+		if self.verticalOrigin:
+			d['verticalOrigin'] = self.verticalOrigin
 		if self.scale:
 			d['scale'] = self.scale
 		if self.pixelOffset:
@@ -940,6 +943,8 @@ class Label(_CZMLBaseObject):
 			d['fillColor'] = self.fillColor
 		if self.font:
 			d['font'] = self.font
+		if self.style:
+			d['style'] = self.style
 		if self.outlineColor:
 			d['outlineColor'] = self.outlineColor
 		if self.outlineWidth:
@@ -1100,7 +1105,7 @@ class Polygon(_DateTimeAware, _CZMLBaseObject):
 
 class Ellipse(_DateTimeAware, _CZMLBaseObject):
 	"""An ellipse, which is a closed curve on the surface of the Earth.
-	   The ellipse is positioned using the position property.
+	The ellipse is positioned using the position property.
 	"""
 	show = None
 	fill = None
@@ -1434,9 +1439,9 @@ class CZMLPacket(_CZMLBaseObject):
 		if isinstance(label, Label):
 			self._label = label
 		elif isinstance(label, dict):
-			l = Label()
-			l.load(label)
-			self._label = l
+			lab = Label()
+			lab.load(label)
+			self._label = lab
 		elif label is None:
 			self._label = None
 		else:

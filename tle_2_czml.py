@@ -11,7 +11,7 @@ import tle2czml
 
 # You can specify the time range you would like to visualise
 # Year, Month, Day, Hour, Minute
-start_time = orig_start_time = datetime(2019, 5, 16, 0, 0, tzinfo=timezone.utc)
+start_time = orig_start_time = datetime(2019, 5, 17, 0, 0, tzinfo=timezone.utc)
 end_time = datetime(2019, 5, 18, 0, 0, tzinfo=timezone.utc)
 day_delta = (end_time - start_time).days
 time_seq = [start_time]
@@ -28,7 +28,7 @@ tles = requests.get("https://www.celestrak.com/NORAD/elements/active.txt").text.
 filtered = []
 
 for i in range(0, len(tles), 3):
-	if "SENTINEL-2" in tles[i]:
+	if "SKYSAT-C" in tles[i] or "SENTINEL-2" in tles[i]:
 		filtered.extend(map(str.rstrip, tles[i:i + 3]))
 
 tle2czml.create_czml(tle_array=filtered, start_time=orig_start_time, end_time=end_time, time_list=time_seq)

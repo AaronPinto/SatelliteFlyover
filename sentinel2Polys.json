@@ -20,11 +20,11 @@
                 ]
             },
             "properties": {
-                "name": "S2B_MSIL1C_20190517T074619_N0207_R135_T47XMH_20190517T084755",
+                "name": "S2B_MSIL1C_20190517T072211_N0207_R135_T47XMH_20190517T084755",
                 "source": "Sentinel-2",
                 "resolution": 10.0,
                 "time_start": "2019-05-17T03:46:19.024-04:00",
-                "download_path": "http://sentinel-s2-l1c.s3.amazonaws.com/products/2019/5/17/S2B_MSIL1C_20190517T074619_N0207_R135_T47XMH_20190517T084755/metadata.xml"
+                "download_path": "http://sentinel-s2-l1c.s3.amazonaws.com/products/2019/5/17/S2B_MSIL1C_20190517T072211_N0207_R135_T47XMH_20190517T084755/metadata.xml"
             }
         },
         {
@@ -70,11 +70,11 @@
                 ]
             },
             "properties": {
-                "name": "S2B_MSIL1C_20190517T074619_N0207_R135_T47XNK_20190517T084755",
+                "name": "S2B_MSIL1C_20190517T072211_N0207_R135_T47XNK_20190517T084755",
                 "source": "Sentinel-2",
                 "resolution": 10.0,
                 "time_start": "2019-05-17T03:46:19.024-04:00",
-                "download_path": "http://sentinel-s2-l1c.s3.amazonaws.com/products/2019/5/17/S2B_MSIL1C_20190517T074619_N0207_R135_T47XNK_20190517T084755/metadata.xml"
+                "download_path": "http://sentinel-s2-l1c.s3.amazonaws.com/products/2019/5/17/S2B_MSIL1C_20190517T072211_N0207_R135_T47XNK_20190517T084755/metadata.xml"
             }
         },
         {
@@ -101,11 +101,11 @@
                 ]
             },
             "properties": {
-                "name": "S2B_MSIL1C_20190517T074619_N0207_R135_T47XMK_20190517T084755",
+                "name": "S2B_MSIL1C_20190517T072211_N0207_R135_T47XMK_20190517T084755",
                 "source": "Sentinel-2",
                 "resolution": 10.0,
                 "time_start": "2019-05-17T03:46:19.024-04:00",
-                "download_path": "http://sentinel-s2-l1c.s3.amazonaws.com/products/2019/5/17/S2B_MSIL1C_20190517T074619_N0207_R135_T47XMK_20190517T084755/metadata.xml"
+                "download_path": "http://sentinel-s2-l1c.s3.amazonaws.com/products/2019/5/17/S2B_MSIL1C_20190517T072211_N0207_R135_T47XMK_20190517T084755/metadata.xml"
             }
         },
         {
@@ -132,11 +132,11 @@
                 ]
             },
             "properties": {
-                "name": "S2B_MSIL1C_20190517T074619_N0207_R135_T46XEM_20190517T084755",
+                "name": "S2B_MSIL1C_20190517T072211_N0207_R135_T46XEM_20190517T084755",
                 "source": "Sentinel-2",
                 "resolution": 10.0,
                 "time_start": "2019-05-17T03:46:19.024-04:00",
-                "download_path": "http://sentinel-s2-l1c.s3.amazonaws.com/products/2019/5/17/S2B_MSIL1C_20190517T074619_N0207_R135_T46XEM_20190517T084755/metadata.xml"
+                "download_path": "http://sentinel-s2-l1c.s3.amazonaws.com/products/2019/5/17/S2B_MSIL1C_20190517T072211_N0207_R135_T46XEM_20190517T084755/metadata.xml"
             }
         },
         {
@@ -155,11 +155,11 @@
                 ]
             },
             "properties": {
-                "name": "S2B_MSIL1C_20190517T074619_N0207_R135_T45XVH_20190517T084755",
+                "name": "S2B_MSIL1C_20190517T072211_N0207_R135_T45XVH_20190517T084755",
                 "source": "Sentinel-2",
                 "resolution": 10.0,
                 "time_start": "2019-05-17T03:46:19.024-04:00",
-                "download_path": "http://sentinel-s2-l1c.s3.amazonaws.com/products/2019/5/17/S2B_MSIL1C_20190517T074619_N0207_R135_T45XVH_20190517T084755/metadata.xml"
+                "download_path": "http://sentinel-s2-l1c.s3.amazonaws.com/products/2019/5/17/S2B_MSIL1C_20190517T072211_N0207_R135_T45XVH_20190517T084755/metadata.xml"
             }
         },
         {
@@ -194,11 +194,11 @@
                 ]
             },
             "properties": {
-                "name": "S2B_MSIL1C_20190517T074619_N0207_R135_T43XEG_20190517T084755",
+                "name": "S2B_MSIL1C_20190517T072211_N0207_R135_T43XEG_20190517T084755",
                 "source": "Sentinel-2",
                 "resolution": 10.0,
                 "time_start": "2019-05-17T03:46:19.024-04:00",
-                "download_path": "http://sentinel-s2-l1c.s3.amazonaws.com/products/2019/5/17/S2B_MSIL1C_20190517T074619_N0207_R135_T43XEG_20190517T084755/metadata.xml"
+                "download_path": "http://sentinel-s2-l1c.s3.amazonaws.com/products/2019/5/17/S2B_MSIL1C_20190517T072211_N0207_R135_T43XEG_20190517T084755/metadata.xml"
             }
         },
         {
@@ -231,11 +231,11 @@
                 ]
             },
             "properties": {
-                "name": "S2B_MSIL1C_20190517T074619_N0207_R135_T47XML_20190517T084755",
+                "name": "S2B_MSIL1C_20190517T072211_N0207_R135_T47XML_20190517T084755",
                 "source": "Sentinel-2",
                 "resolution": 10.0,
                 "time_start": "2019-05-17T03:46:19.024-04:00",
-                "download_path": "http://sentinel-s2-l1c.s3.amazonaws.com/products/2019/5/17/S2B_MSIL1C_20190517T074619_N0207_R135_T47XML_20190517T084755/metadata.xml"
+                "download_path": "http://sentinel-s2-l1c.s3.amazonaws.com/products/2019/5/17/S2B_MSIL1C_20190517T072211_N0207_R135_T47XML_20190517T084755/metadata.xml"
             }
         },
         {
@@ -273,11 +273,11 @@
                 ]
             },
             "properties": {
-                "name": "S2B_MSIL1C_20190517T074619_N0207_R135_T44XMM_20190517T084755",
+                "name": "S2B_MSIL1C_20190517T072211_N0207_R135_T44XMM_20190517T084755",
                 "source": "Sentinel-2",
                 "resolution": 10.0,
                 "time_start": "2019-05-17T03:46:19.024-04:00",
-                "download_path": "http://sentinel-s2-l1c.s3.amazonaws.com/products/2019/5/17/S2B_MSIL1C_20190517T074619_N0207_R135_T44XMM_20190517T084755/metadata.xml"
+                "download_path": "http://sentinel-s2-l1c.s3.amazonaws.com/products/2019/5/17/S2B_MSIL1C_20190517T072211_N0207_R135_T44XMM_20190517T084755/metadata.xml"
             }
         },
         {
@@ -301,11 +301,11 @@
                 ]
             },
             "properties": {
-                "name": "S2B_MSIL1C_20190517T074619_N0207_R135_T44XML_20190517T084755",
+                "name": "S2B_MSIL1C_20190517T072211_N0207_R135_T44XML_20190517T084755",
                 "source": "Sentinel-2",
                 "resolution": 10.0,
                 "time_start": "2019-05-17T03:46:19.024-04:00",
-                "download_path": "http://sentinel-s2-l1c.s3.amazonaws.com/products/2019/5/17/S2B_MSIL1C_20190517T074619_N0207_R135_T44XML_20190517T084755/metadata.xml"
+                "download_path": "http://sentinel-s2-l1c.s3.amazonaws.com/products/2019/5/17/S2B_MSIL1C_20190517T072211_N0207_R135_T44XML_20190517T084755/metadata.xml"
             }
         },
         {
@@ -331,11 +331,11 @@
                 ]
             },
             "properties": {
-                "name": "S2B_MSIL1C_20190517T074619_N0207_R135_T44XNP_20190517T084755",
+                "name": "S2B_MSIL1C_20190517T072211_N0207_R135_T44XNP_20190517T084755",
                 "source": "Sentinel-2",
                 "resolution": 10.0,
                 "time_start": "2019-05-17T03:46:19.024-04:00",
-                "download_path": "http://sentinel-s2-l1c.s3.amazonaws.com/products/2019/5/17/S2B_MSIL1C_20190517T074619_N0207_R135_T44XNP_20190517T084755/metadata.xml"
+                "download_path": "http://sentinel-s2-l1c.s3.amazonaws.com/products/2019/5/17/S2B_MSIL1C_20190517T072211_N0207_R135_T44XNP_20190517T084755/metadata.xml"
             }
         },
         {
@@ -362,11 +362,11 @@
                 ]
             },
             "properties": {
-                "name": "S2B_MSIL1C_20190517T074619_N0207_R135_T45XVE_20190517T084755",
+                "name": "S2B_MSIL1C_20190517T072211_N0207_R135_T45XVE_20190517T084755",
                 "source": "Sentinel-2",
                 "resolution": 10.0,
                 "time_start": "2019-05-17T03:46:19.024-04:00",
-                "download_path": "http://sentinel-s2-l1c.s3.amazonaws.com/products/2019/5/17/S2B_MSIL1C_20190517T074619_N0207_R135_T45XVE_20190517T084755/metadata.xml"
+                "download_path": "http://sentinel-s2-l1c.s3.amazonaws.com/products/2019/5/17/S2B_MSIL1C_20190517T072211_N0207_R135_T45XVE_20190517T084755/metadata.xml"
             }
         },
         {
@@ -387,11 +387,11 @@
                 ]
             },
             "properties": {
-                "name": "S2B_MSIL1C_20190517T074619_N0207_R135_T44XNK_20190517T084755",
+                "name": "S2B_MSIL1C_20190517T072211_N0207_R135_T44XNK_20190517T084755",
                 "source": "Sentinel-2",
                 "resolution": 10.0,
                 "time_start": "2019-05-17T03:46:19.024-04:00",
-                "download_path": "http://sentinel-s2-l1c.s3.amazonaws.com/products/2019/5/17/S2B_MSIL1C_20190517T074619_N0207_R135_T44XNK_20190517T084755/metadata.xml"
+                "download_path": "http://sentinel-s2-l1c.s3.amazonaws.com/products/2019/5/17/S2B_MSIL1C_20190517T072211_N0207_R135_T44XNK_20190517T084755/metadata.xml"
             }
         },
         {
@@ -416,11 +416,11 @@
                 ]
             },
             "properties": {
-                "name": "S2B_MSIL1C_20190517T074619_N0207_R135_T44XMN_20190517T084755",
+                "name": "S2B_MSIL1C_20190517T072211_N0207_R135_T44XMN_20190517T084755",
                 "source": "Sentinel-2",
                 "resolution": 10.0,
                 "time_start": "2019-05-17T03:46:19.024-04:00",
-                "download_path": "http://sentinel-s2-l1c.s3.amazonaws.com/products/2019/5/17/S2B_MSIL1C_20190517T074619_N0207_R135_T44XMN_20190517T084755/metadata.xml"
+                "download_path": "http://sentinel-s2-l1c.s3.amazonaws.com/products/2019/5/17/S2B_MSIL1C_20190517T072211_N0207_R135_T44XMN_20190517T084755/metadata.xml"
             }
         },
         {
@@ -442,11 +442,11 @@
                 ]
             },
             "properties": {
-                "name": "S2B_MSIL1C_20190517T074619_N0207_R135_T44XNN_20190517T084755",
+                "name": "S2B_MSIL1C_20190517T072211_N0207_R135_T44XNN_20190517T084755",
                 "source": "Sentinel-2",
                 "resolution": 10.0,
                 "time_start": "2019-05-17T03:46:19.024-04:00",
-                "download_path": "http://sentinel-s2-l1c.s3.amazonaws.com/products/2019/5/17/S2B_MSIL1C_20190517T074619_N0207_R135_T44XNN_20190517T084755/metadata.xml"
+                "download_path": "http://sentinel-s2-l1c.s3.amazonaws.com/products/2019/5/17/S2B_MSIL1C_20190517T072211_N0207_R135_T44XNN_20190517T084755/metadata.xml"
             }
         },
         {
@@ -491,11 +491,11 @@
                 ]
             },
             "properties": {
-                "name": "S2B_MSIL1C_20190517T074619_N0207_R135_T44XNL_20190517T084755",
+                "name": "S2B_MSIL1C_20190517T072211_N0207_R135_T44XNL_20190517T084755",
                 "source": "Sentinel-2",
                 "resolution": 10.0,
                 "time_start": "2019-05-17T03:46:19.024-04:00",
-                "download_path": "http://sentinel-s2-l1c.s3.amazonaws.com/products/2019/5/17/S2B_MSIL1C_20190517T074619_N0207_R135_T44XNL_20190517T084755/metadata.xml"
+                "download_path": "http://sentinel-s2-l1c.s3.amazonaws.com/products/2019/5/17/S2B_MSIL1C_20190517T072211_N0207_R135_T44XNL_20190517T084755/metadata.xml"
             }
         },
         {
@@ -517,11 +517,11 @@
                 ]
             },
             "properties": {
-                "name": "S2B_MSIL1C_20190517T074619_N0207_R135_T43XEH_20190517T084755",
+                "name": "S2B_MSIL1C_20190517T072211_N0207_R135_T43XEH_20190517T084755",
                 "source": "Sentinel-2",
                 "resolution": 10.0,
                 "time_start": "2019-05-17T03:46:19.024-04:00",
-                "download_path": "http://sentinel-s2-l1c.s3.amazonaws.com/products/2019/5/17/S2B_MSIL1C_20190517T074619_N0207_R135_T43XEH_20190517T084755/metadata.xml"
+                "download_path": "http://sentinel-s2-l1c.s3.amazonaws.com/products/2019/5/17/S2B_MSIL1C_20190517T072211_N0207_R135_T43XEH_20190517T084755/metadata.xml"
             }
         },
         {
