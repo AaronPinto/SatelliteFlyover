@@ -24,7 +24,7 @@ viewer.scene.debugShowFramesPerSecond = true;
 
 const rot90 = Cesium.Matrix3.fromRotationY(Cesium.Math.toRadians(-90));
 const test = new Cesium.CzmlDataSource();
-const timeToShowCone = 200.0; //seconds
+const durationToShowCone = 200.0; //seconds
 
 let posOfSat = new Cesium.Cartesian3(),
     direction = new Cesium.Cartesian3(),
@@ -33,7 +33,7 @@ let posOfSat = new Cesium.Cartesian3(),
 let rotationMatrix = new Cesium.Matrix3();
 let coneMatrix = new Cesium.Matrix4();
 let nearPolys = [],
-    numSameTime = [],
+    polyGroup = [],
     geoJsonSources = [],
     result = [];
 let primitives: { [id: string]: any } = {};
@@ -56,10 +56,33 @@ let satellites = test.entities;
 //           /,_/      '`-'
 //
 
-//Figure out which source its from, then parse and return the datetime, which satellite it is, the centroid, the id,
-//the radius, whether or not there are multiple polys with the same datetime, and the GeoJSON feature. Then sort polys
+class Polygon {
+    datetime: Cesium.JulianDate;
+    sat: string;
+    centroid: Cesium.Cartesian3;
+    id: string;
+    radius: number;
+    inGroup: boolean;
+    geoJSON: object;
+    centroidLon: number;
+    centroidLat: number;
+
+    constructor(datetime, sat, centroid, id, radius, inGroup, geoJSON, longitude, latitude) {
+        this.datetime = datetime;
+        this.sat = sat;
+        this.centroid = centroid;
+        this.id = id;
+        this.radius = radius;
+        this.inGroup = inGroup;
+        this.geoJSON = geoJSON;
+        this.centroidLon = longitude;
+        this.centroidLat = latitude;
+    }
+}
+
+//Figure out which source its from, then parse and return a new Polygon object. Then sort polys
 //by their time start, then sort by specific satellite source alphabetically, then sort by latitude and longitude.
-const polyInfo = polys.features
+const polyInfo: Polygon[] = polys.features
     .map(feature => {
         switch (feature.properties.source) {
             case "SkySat": {
@@ -71,7 +94,7 @@ const polyInfo = polys.features
                 let vertices = feature.geometry.coordinates[0]; //smh GeoJSON with its array nesting
                 let targetPoints = compute2DPolygonCentroid(vertices, vertices.length);
 
-                return [
+                return new Polygon(
                     dt,
                     "SKYSAT-".concat(prodname[2].slice(2).toUpperCase()),
                     Cesium.Cartesian3.fromDegrees(targetPoints[0], targetPoints[1]),
@@ -81,7 +104,7 @@ const polyInfo = polys.features
                     feature,
                     targetPoints[0],
                     targetPoints[1]
-                ];
+                );
             }
             case "Sentinel-2": {
                 let prodname = feature.properties.name.split("_");
@@ -93,7 +116,7 @@ const polyInfo = polys.features
                 let vertices = feature.geometry.coordinates[0];
                 let targetPoints = compute2DPolygonCentroid(vertices, vertices.length);
 
-                return [
+                return new Polygon(
                     dt,
                     "SENTINEL-".concat(prodname[0].slice(1)),
                     Cesium.Cartesian3.fromDegrees(targetPoints[0], targetPoints[1]),
@@ -103,7 +126,7 @@ const polyInfo = polys.features
                     feature,
                     targetPoints[0],
                     targetPoints[1]
-                ];
+                );
             }
             default: {
                 alert("This source, ${feature.properties.source}, isn't supported yet");
@@ -112,32 +135,32 @@ const polyInfo = polys.features
         }
     })
     .sort((a, b) => {
-        let dayDiff = a[0].dayNumber - b[0].dayNumber,
-            secDiff = a[0].secondsOfDay - b[0].secondsOfDay;
+        let dayDiff = a.datetime.dayNumber - b.datetime.dayNumber,
+            secDiff = a.datetime.secondsOfDay - b.datetime.secondsOfDay;
         if (dayDiff !== 0) return dayDiff;
         else if (secDiff !== 0) return secDiff;
 
-        let satDiff = a[1].localeCompare(b[1]);
+        let satDiff = a.sat.localeCompare(b.sat);
         if (satDiff !== 0) return satDiff;
 
-        let latDiff = b[8] - a[8];
+        let latDiff = b.centroidLat - a.centroidLat;
         if (latDiff !== 0) return latDiff;
-        return b[7] - a[7];
+        return b.centroidLon - a.centroidLon;
     });
 
 function calcNumPolysAtSameTime() {
     let temp = [];
     for (let i = 0; i < polyInfo.length - 1; i++)
         if (
-            polyInfo[i][1] === polyInfo[i + 1][1] &&
-            polyInfo[i][0].dayNumber === polyInfo[i + 1][0].dayNumber &&
-            polyInfo[i][0].secondsOfDay === polyInfo[i + 1][0].secondsOfDay
+            polyInfo[i].sat === polyInfo[i + 1].sat &&
+            polyInfo[i].datetime.dayNumber === polyInfo[i + 1].datetime.dayNumber &&
+            polyInfo[i].datetime.secondsOfDay === polyInfo[i + 1].datetime.secondsOfDay
         ) {
-            polyInfo[i][5] = true;
-            polyInfo[i + 1][5] = true;
+            polyInfo[i].inGroup = true;
+            polyInfo[i + 1].inGroup = true;
             temp.push(i);
         } else if (temp.length >= 1) {
-            numSameTime.push({
+            polyGroup.push({
                 total: i - temp[0] + 1,
                 startIndex: temp[0],
                 endIndex: i
@@ -146,20 +169,20 @@ function calcNumPolysAtSameTime() {
         }
 
     if (temp.length >= 1)
-        numSameTime.push({
+        polyGroup.push({
             total: polyInfo.length - temp[0],
             startIndex: temp[0],
             endIndex: polyInfo.length - 1
         });
 
     // console.log(polyInfo);
-    console.log(numSameTime);
+    console.log(polyGroup);
 }
 
 calcNumPolysAtSameTime();
 
 for (let i = 0; i < polyInfo.length; i++) {
-    Cesium.GeoJsonDataSource.load(polyInfo[i][6], {
+    Cesium.GeoJsonDataSource.load(polyInfo[i].geoJSON, {
         stroke: Cesium.Color.HOTPINK,
         fill: Cesium.Color.PINK
     }).then(myDataSource => {
@@ -288,7 +311,7 @@ function addTrackingMenu() {
 addTrackingMenu();
 
 let prevDay = Cesium.JulianDate.toGregorianDate(viewer.clock.startTime);
-let timePerSamePoly;
+let timePerPoly;
 
 /**
  * This method leverages collective synergy to drive "out of the box"
@@ -311,28 +334,28 @@ viewer.clock.onTick.addEventListener(clock => {
     prevDay.day = gregorianDate.day;
 
     polyInfo: for (let i = 0; i < polyInfo.length; i++) {
-        let secDiff = Cesium.JulianDate.secondsDifference(polyInfo[i][0], clock.currentTime);
-        //Only add polygons that are less than or equal to timeToShowCone seconds from being captured...
-        if (secDiff <= timeToShowCone) {
-            if (polyInfo[i][5]) {
+        let secDiff = Cesium.JulianDate.secondsDifference(polyInfo[i].datetime, clock.currentTime);
+        //Only add polygons that are less than or equal to durationToShowCone seconds from being captured...
+        if (secDiff <= durationToShowCone) {
+            if (polyInfo[i].inGroup) {
                 let j;
-                for (j = 0; j < numSameTime.length; j++)
-                    if (numSameTime[j].startIndex <= i && i <= numSameTime[j].endIndex) {
-                        timePerSamePoly = timeToShowCone / numSameTime[j].total;
+                for (j = 0; j < polyGroup.length; j++)
+                    if (polyGroup[j].startIndex <= i && i <= polyGroup[j].endIndex) {
+                        timePerPoly = durationToShowCone / polyGroup[j].total;
                         break;
                     }
 
                 //Search through and delete all polygons from this set, and then only add the ones that are in their time group
                 for (let k = 0; k < nearPolys.length; k++)
-                    if (nearPolys[k][3] === polyInfo[i][3]) {
-                        viewer.scene.primitives.remove(primitives[nearPolys[k][1] + "cone"]);
+                    if (nearPolys[k].id === polyInfo[i].id) {
+                        viewer.scene.primitives.remove(primitives[nearPolys[k].sat + "cone"]);
                         nearPolys.splice(k, 1);
                         break;
                     }
 
                 if (
-                    secDiff <= timeToShowCone - (i - numSameTime[j].startIndex) * timePerSamePoly &&
-                    secDiff >= timeToShowCone - (i - numSameTime[j].startIndex + 1) * timePerSamePoly
+                    durationToShowCone - (i - polyGroup[j].startIndex + 1) * timePerPoly <= secDiff &&
+                    secDiff <= durationToShowCone - (i - polyGroup[j].startIndex) * timePerPoly
                 )
                     nearPolys.push(polyInfo[i]);
 
@@ -343,14 +366,14 @@ viewer.clock.onTick.addEventListener(clock => {
                     //Search through the entire array and if polygon is not there then add it https://jsperf.com/dankmemes
                     geoJsonSources[i].show = false;
                     for (let j = 0; j < nearPolys.length; j++)
-                        if (nearPolys[j][3] === polyInfo[i][3]) continue polyInfo;
+                        if (nearPolys[j].id === polyInfo[i].id) continue polyInfo;
                     nearPolys.push(polyInfo[i]);
                 } else {
                     //Because there will only ever be 1 of each polygon in the array thanks to above, we only need to search until the first occurrence
                     geoJsonSources[i].show = true;
                     for (let j = 0; j < nearPolys.length; j++)
-                        if (nearPolys[j][3] === polyInfo[i][3]) {
-                            viewer.scene.primitives.remove(primitives[nearPolys[j][1] + "cone"]);
+                        if (nearPolys[j].id === polyInfo[i].id) {
+                            viewer.scene.primitives.remove(primitives[nearPolys[j].sat + "cone"]);
                             nearPolys.splice(j, 1);
                             break;
                         }
@@ -358,7 +381,7 @@ viewer.clock.onTick.addEventListener(clock => {
             }
         } else {
             //Handle in case user clicks on timeline
-            viewer.scene.primitives.remove(primitives[polyInfo[i][1] + "cone"]);
+            viewer.scene.primitives.remove(primitives[polyInfo[i].sat + "cone"]);
             geoJsonSources[i].show = false;
             let index = nearPolys.indexOf(polyInfo[i]);
             if (index > -1) nearPolys.splice(index);
@@ -367,9 +390,9 @@ viewer.clock.onTick.addEventListener(clock => {
 
     //For each near-in-time polygon, figure out the position and orientation for the cone and render it
     for (let i = 0; i < nearPolys.length; i++) {
-        posOfSat = satellites.getById("Satellite/" + nearPolys[i][1]).position.getValue(clock.currentTime);
+        posOfSat = satellites.getById("Satellite/" + nearPolys[i].sat).position.getValue(clock.currentTime);
 
-        Cesium.Cartesian3.subtract(nearPolys[i][2], posOfSat, direction);
+        Cesium.Cartesian3.subtract(nearPolys[i].centroid, posOfSat, direction);
         let length = Cesium.Cartesian3.magnitude(direction);
         let halfLength = length / 2.0;
         Cesium.Cartesian3.normalize(direction, direction);
@@ -385,15 +408,15 @@ viewer.clock.onTick.addEventListener(clock => {
         Cesium.Cartesian3.multiplyByScalar(direction, halfLength, shiftPos);
         Cesium.Cartesian3.add(posOfSat, shiftPos, shiftPos);
 
-        viewer.scene.primitives.remove(primitives[nearPolys[i][1] + "cone"]);
+        viewer.scene.primitives.remove(primitives[nearPolys[i].sat + "cone"]);
 
-        primitives[nearPolys[i][1] + "cone"] = viewer.scene.primitives.add(
+        primitives[nearPolys[i].sat + "cone"] = viewer.scene.primitives.add(
             new Cesium.Primitive({
                 geometryInstances: new Cesium.GeometryInstance({
                     geometry: new Cesium.CylinderGeometry({
                         length: length,
                         topRadius: 10,
-                        bottomRadius: nearPolys[i][4]
+                        bottomRadius: nearPolys[i].radius
                     }),
                     attributes: {
                         color: new Cesium.ColorGeometryInstanceAttribute(0.0, 0.4, 1.0, 0.7)

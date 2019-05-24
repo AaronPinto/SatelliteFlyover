@@ -8,7 +8,7 @@
         "fix": "prettier --write --print-width 110 --tab-width 4 ./**.{ts,json,js}"
     },
     "devDependencies": {
-        "geojson": "^0.5.0",
+        "@types/cesium": "^1.54.4",
         "html-webpack-plugin": "^3.2.0",
         "prettier": "^1.17.1",
         "ts-loader": "^6.0.0",
