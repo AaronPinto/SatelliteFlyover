@@ -7,7 +7,7 @@ const viewer = new Cesium.Viewer("cesiumContainer", {
     shouldAnimate: true,
     skyAtmosphere: false,
     imageryProvider: new Cesium.UrlTemplateImageryProvider({
-        url: `https://api.mapbox.com/styles/v1/skywatch-team/cjsgety8v0s2m1fo49t27s093/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2t5d2F0Y2gtdGVhbSIsImEiOiJjajgzMGlyNmk1ZTBqMnducWFidjNqZjU4In0.6f5beyt2YsWJcAPfxRYuEw`
+        url: ``
     })
 });
 viewer.scene.skyBox.destroy();
